@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Fonction qui demande à l'utilisateur de deviner le nombre de fichiers
+guessing_game() {
+    local num_files=$(ls -1 | wc -l)  # Compter le nombre de fichiers dans le répertoire actuel
+    local guess=0
+
+    echo "Bienvenue dans le jeu de devinette!"
+    echo "Combien de fichiers y a-t-il dans le répertoire actuel ?"
+
+    # Boucle qui continue tant que la réponse est incorrecte
+    while [ $guess -ne $num_files ]; do
+        read -p "Entrez votre estimation: " guess
+
+        if [ $guess -lt $num_files ]; then
+            echo "Votre estimation est trop basse. Essayez encore."
+        elif [ $guess -gt $num_files ]; then
+            echo "Votre estimation est trop haute. Essayez encore."
+        else
+            echo "Félicitations ! Vous avez deviné correctement."
+        fi
+    done
+}
+
+# Appeler la fonction
+guessing_game
